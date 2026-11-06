@@ -1,7 +1,7 @@
 import { b, c, heading, i, t, type CaseStudyBlock } from "./types";
 
 /**
- * Fangtooth Case Study 01 — Hybrid Excel & Local Backend.
+ * Fangtooth Case Study 01 - Hybrid Excel & Local Backend.
  * Extracted from the approved source document. Review-only sections and
  * private repository links are excluded.
  */
@@ -31,21 +31,19 @@ export const body: CaseStudyBlock[] = [
     kind: "paragraph",
     segments: [
       t(
-        "The following diagram is a technical overview, not a depiction of every endpoint or configuration. API paths use the production "
-      ),
-      c("/api"),
-      t(" prefix; development mode can use root-level paths."),
+        "The following diagram is a technical overview, not a depiction of every endpoint or configuration (due to security reasons)."
+      )
     ],
   },
   {
     kind: "mermaid",
     label: "Hybrid Excel and local backend architecture",
     chart: `flowchart TB
-    subgraph EXCEL["Microsoft Excel — presentation layer"]
+    subgraph EXCEL["Microsoft Excel - presentation layer"]
         UI["Office.js + Vue 3 task pane<br/>Upload · Configure · Visualize"]
     end
 
-    subgraph DESKTOP["Windows machine — local processing"]
+    subgraph DESKTOP["Windows machine - local processing"]
         GATE["FastAPI API gateway"]
         VALIDATE["Stage 1 · File validation<br/>Columns · Types · Schema"]
         CROSS["Stage 2 · Cross-dataset checks<br/>DSL-based consistency rules"]
@@ -58,7 +56,7 @@ export const body: CaseStudyBlock[] = [
         SQLITE[("Local SQLite<br/>Reference-rate cache")]
     end
 
-    subgraph CLOUD["Supporting cloud services — not core analytics compute"]
+    subgraph CLOUD["Supporting cloud services - not core analytics compute"]
         R2["Cloudflare R2<br/>Frontend assets"]
         FUNCTION["Azure Function App<br/>Reference-data proxy"]
         AZSQL[("Azure SQL<br/>Tax / FX reference data")]
@@ -104,7 +102,7 @@ export const body: CaseStudyBlock[] = [
 
   {
     kind: "paragraph",
-    segments: [b("Representative request sequence:")],
+    segments: [b("Representative request/response sequence:")],
   },
   {
     kind: "list",
@@ -148,7 +146,7 @@ export const body: CaseStudyBlock[] = [
     kind: "paragraph",
     segments: [
       t(
-        "Financial workflows often begin with multiple Excel datasets—such as a trial balance, chart of accounts, and general ledger—that need to be checked, transformed, reconciled, and explored together. An Excel task pane provides a familiar interface, but its web-based execution environment is not the right place to manage extensive file-system operations or analytical processing."
+        "Financial workflows often begin with multiple Excel datasets, such as: a trial balance, chart of accounts, and general ledger-that need to be checked, transformed, reconciled, and explored together. An Excel task pane provides a familiar interface, but its web-based execution environment is not the right place to manage extensive file-system operations or analytical processing."
       ),
     ],
   },
@@ -208,36 +206,6 @@ export const body: CaseStudyBlock[] = [
     ],
   },
 
-  heading(2, "Why this design"),
-
-  {
-    kind: "paragraph",
-    segments: [
-      b("Performance and responsiveness."),
-      t(
-        " Computational workloads reside outside the Excel task pane. DuckDB and columnar Parquet storage provide a suitable execution model for repeated analytical queries without requiring the frontend to process large datasets."
-      ),
-    ],
-  },
-  {
-    kind: "paragraph",
-    segments: [
-      b("Data handling."),
-      t(
-        " Core financial datasets and analytical processing stay on the desktop in the documented workflow. This reduces unnecessary data movement, but does not by itself prove end-to-end security or regulatory compliance; other platform features do connect to cloud services."
-      ),
-    ],
-  },
-  {
-    kind: "paragraph",
-    segments: [
-      b("Separation of concerns."),
-      t(
-        " The Office.js/Vue interface, local API, storage, and optional cloud services have different responsibilities. The backend can evolve its processing logic without embedding that logic in the user interface."
-      ),
-    ],
-  },
-
   heading(2, "Trade-offs"),
 
   {
@@ -258,13 +226,5 @@ export const body: CaseStudyBlock[] = [
         "The resulting architecture supports an Excel-native workflow for importing and validating financial datasets, converting them into locally stored analytical formats, and requesting charts and reports through explicit API boundaries. It establishes a reusable foundation for subsequent analytics, cloud-integration, and AI capabilities."
       ),
     ],
-  },
-  {
-    kind: "note",
-    segments: [
-      t(
-        "The repositories document these components and flows, but they do not establish a measured Fangtooth-specific speedup, dataset-size benchmark, or user-adoption figure."
-      ),
-    ],
-  },
+  }
 ];

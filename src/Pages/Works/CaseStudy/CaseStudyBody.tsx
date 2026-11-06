@@ -1,9 +1,9 @@
 import { Fragment } from "react";
 import {
   type CaseStudyBlock,
-  type HeadingBlock,
   type InlineSegment,
 } from "../../../content/caseStudies/types";
+import { buildOutline } from "../../../content/caseStudies/outline";
 import MermaidDiagram from "../diagrams/MermaidDiagram";
 
 /**
@@ -53,7 +53,7 @@ const Segments = ({ segments }: { segments: InlineSegment[] }) => (
 );
 
 const Paragraph = ({ segments }: { segments: InlineSegment[] }) => (
-  <p className="mt-5 max-w-reading text-works-body text-works-muted">
+  <p className="mt-5 text-works-body text-works-muted">
     <Segments segments={segments} />
   </p>
 );
@@ -68,7 +68,7 @@ const List = ({
   const ListTag = ordered ? "ol" : "ul";
   return (
     <ListTag
-      className={`mt-5 max-w-reading space-y-2 text-works-body text-works-muted ${
+      className={`mt-5 space-y-2 text-works-body text-works-muted ${
         ordered ? "list-decimal pl-6" : "list-disc pl-6"
       }`}
     >
@@ -88,7 +88,7 @@ const Table = ({
   headers: InlineSegment[][];
   rows: InlineSegment[][][];
 }) => (
-  <div className="mt-6 max-w-reading overflow-x-auto">
+  <div className="mt-6 overflow-x-auto">
     <table className="w-full border-collapse text-left text-tiny">
       <thead>
         <tr>
@@ -121,13 +121,13 @@ const Table = ({
 );
 
 const Note = ({ segments }: { segments: InlineSegment[] }) => (
-  <p className="mt-5 max-w-reading text-tiny italic leading-relaxed text-works-muted">
+  <p className="mt-5 text-tiny italic leading-relaxed text-works-muted">
     <Segments segments={segments} />
   </p>
 );
 
 const Code = ({ code }: { code: string }) => (
-  <pre className="mt-5 max-w-reading overflow-x-auto rounded-xl border border-works-border bg-works-card p-4 font-mono text-tiny leading-relaxed text-works-text">
+  <pre className="mt-5 overflow-x-auto rounded-xl border border-works-border bg-works-card p-4 font-mono text-tiny leading-relaxed text-works-text">
     <code>{code}</code>
   </pre>
 );
@@ -153,19 +153,12 @@ const Mermaid = ({
   </figure>
 );
 
-const SubHeading = ({ block }: { block: HeadingBlock }) => (
-  <h3
-    id={block.id}
-    className="mt-9 scroll-mt-24 font-robotoSlab text-works-h3 font-medium text-works-text"
-  >
-    {block.text}
-  </h3>
-);
-
 const BlockRenderer = ({ block }: { block: CaseStudyBlock }) => {
   switch (block.kind) {
+    // Section and subsection headings are structural: `CaseStudyBody` renders
+    // them from the shared outline so they carry generated numbering.
     case "heading":
-      return block.level === 3 ? <SubHeading block={block} /> : null;
+      return null;
     case "paragraph":
       return <Paragraph segments={block.segments} />;
     case "list":
@@ -193,33 +186,34 @@ interface CaseStudyBodyProps {
 }
 
 /**
- * Groups content into sections by level-2 heading, preserving the approved
- * "Section NN / heading" rhythm with hairline dividers.
+ * Carries a pre-renumbering anchor id (e.g. "4-three-integration-workflows")
+ * so older deep links still scroll to the right place. It is empty and
+ * aria-hidden, so no duplicate heading is ever displayed.
+ */
+const LegacyAnchor = ({ id }: { id?: string }) =>
+  id ? <span id={id} aria-hidden="true" /> : null;
+
+/**
+ * Groups content into sections using the shared outline, preserving the
+ * approved "Section NN / heading" rhythm with hairline dividers. Numbers and
+ * subsection letters are derived from position in the selected (public or
+ * internal) section collection, never hard-coded in the content.
  */
 const CaseStudyBody = ({ blocks }: CaseStudyBodyProps) => {
-  const sections: { heading: HeadingBlock; content: CaseStudyBlock[] }[] = [];
-  let current: { heading: HeadingBlock; content: CaseStudyBlock[] } | null =
-    null;
-
-  for (const block of blocks) {
-    if (block.kind === "heading" && block.level === 2) {
-      current = { heading: block, content: [] };
-      sections.push(current);
-    } else if (current) {
-      current.content.push(block);
-    }
-  }
+  const sections = buildOutline(blocks);
 
   return (
     <div>
-      {sections.map((section, index) => (
+      {sections.map((section) => (
         <section
           key={section.heading.id}
           id={section.heading.id}
           aria-labelledby={`${section.heading.id}-heading`}
           className="scroll-mt-24 border-t border-works-border py-9 first:border-t-0 first:pt-0"
         >
-          <p className="works-kicker">Section {String(index + 1).padStart(2, "0")}</p>
+          <LegacyAnchor id={section.heading.legacyId} />
+
+          <p className="works-kicker">Section {section.displayNumber}</p>
 
           <h2
             id={`${section.heading.id}-heading`}
@@ -228,8 +222,25 @@ const CaseStudyBody = ({ blocks }: CaseStudyBodyProps) => {
             {section.heading.text}
           </h2>
 
-          {section.content.map((block, blockIndex) => (
+          {section.blocks.map((block, blockIndex) => (
             <BlockRenderer key={blockIndex} block={block} />
+          ))}
+
+          {section.subsections.map((subsection) => (
+            <Fragment key={subsection.heading.id}>
+              <LegacyAnchor id={subsection.heading.legacyId} />
+
+              <h3
+                id={subsection.heading.id}
+                className="mt-9 scroll-mt-24 font-robotoSlab text-works-h3 font-medium text-works-text"
+              >
+                {subsection.label}. {subsection.heading.text}
+              </h3>
+
+              {subsection.blocks.map((block, blockIndex) => (
+                <BlockRenderer key={blockIndex} block={block} />
+              ))}
+            </Fragment>
           ))}
         </section>
       ))}

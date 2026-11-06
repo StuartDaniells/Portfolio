@@ -35,8 +35,7 @@ const Works = () => {
 
                 <p className="mt-6 text-pretty text-works-body text-works-muted">
                   Explore the challenges, decisions and trade-offs behind each of them.
-                </p>
-                <p className="mt-6 text-pretty text-works-body text-works-muted">
+                  <br />
                   Each organization below contains an architectural overview and a grid of its case
                   studies.
                 </p>

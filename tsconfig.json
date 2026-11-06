@@ -15,6 +15,13 @@
     "jsx": "react-jsx",
     "allowJs": true,
 
+    /* Build-time content selection. Vite resolves @case-study-bodies to the
+       public or internal registry (see vite.config.js); this mapping only
+       keeps the editor pinned to the public shape. */
+    "paths": {
+      "@case-study-bodies": ["./src/content/caseStudies/registry.public.ts"]
+    },
+
     /* Linting */
     "strict": true,
     "noUnusedLocals": false,

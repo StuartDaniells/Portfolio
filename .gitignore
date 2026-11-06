@@ -11,6 +11,9 @@
 # production
 /build
 
+# internal-only build (contains complete case studies) - NEVER commit or deploy
+/build-internal
+
 # misc
 .DS_Store
 .env.local

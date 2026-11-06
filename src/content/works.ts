@@ -4,7 +4,7 @@
  * This module owns *metadata* only: organization grouping, study order, titles,
  * stack labels, card copy and publication state. Long-form case-study prose
  * lives in `src/content/caseStudies/` and is rendered through the case-study
- * body renderer — never duplicated here.
+ * body renderer - never duplicated here.
  */
 
 export type StudyStatus = "published" | "placeholder";
@@ -51,7 +51,7 @@ export const fangtooth: WorksOrganization = {
         "Architecting a Hybrid Excel-Integrated Financial Analytics Platform",
       title: "Hybrid Excel & Local Backend",
       focus: "Office.js · local process boundary",
-      stack: ["Office.js", "Vue 3", "FastAPI"],
+      stack: ["Office.js", "Vue 3", "Python FastAPI", "JavaScript", "State management (Pinia)", "Hooks and composition API", "AWS CLI s3 bucket sync"],
       teaser:
         "An Excel-native interface connected to a separate local processing engine for financial data workflows.",
       takeaway:
@@ -65,7 +65,7 @@ export const fangtooth: WorksOrganization = {
       articleTitle: "Designing a Configuration-Driven Financial Analytics Engine",
       title: "Configuration-Driven Analytics",
       focus: "Query engine · declarative rules",
-      stack: ["Python", "DuckDB", "Parquet"],
+      stack: ["Python", "DuckDB", "Parquet", "SQL generation", "JSON DSL (Domain-Specific Language)"],
       teaser:
         "A configuration driven query pipeline for reusable, structured financial analytics.",
       takeaway:
@@ -80,7 +80,7 @@ export const fangtooth: WorksOrganization = {
         "Architecting a Serverless Cloud Gateway for Authentication, Data Access & Software Distribution",
       title: "Cloud Gateway & Security",
       focus: "Identity · reference data",
-      stack: ["Azure Functions", "OAuth 2.0"],
+      stack: ["Azure Functions", "OAuth 2.0", "Cloudflare R2 Blob Storage", "Azure Table Storage", "Azure Key Vault", "Windows KeyRings"],
       teaser:
         "A serverless integration boundary for identity, reference data, and software distribution.",
       takeaway:
@@ -95,11 +95,11 @@ export const fangtooth: WorksOrganization = {
         "Architecting an LLM Orchestration & RAG Financial Analysis Layer",
       title: "LLM Orchestration & RAG",
       focus: "Retrieval · grounded answers",
-      stack: ["LlamaIndex", "Qdrant", "Ollama"],
+      stack: ["LlamaIndex", "Qdrant", "Ollama", "Docker", "SSE streaming", "Prompt assembly", "OpenAI API", "Similarity search", "Vector embeddings"],
       teaser:
         "An orchestration layer combining document retrieval with deterministic financial context for AI-assisted analysis.",
       takeaway:
-        "Grounding is treated as an orchestration problem: retrieve first, assemble explicit context, then generate — never let the model reach for data itself.",
+        "Grounding is treated as an orchestration problem: retrieve first, assemble explicit context, then generate - never let the model reach for data itself.",
       status: "published",
     },
   ],
@@ -108,7 +108,7 @@ export const fangtooth: WorksOrganization = {
 export const alumapower: WorksOrganization = {
   id: "alumapower",
   name: "AlumaPower",
-  role: "Data Engineer & Full-Stack Developer",
+  role: "Data & Cloud Engineer · Full-Stack Developer",
   summary:
     "Industrial telemetry and enterprise software delivery: ingesting operational data and building the applications that sit on top of it.",
   studies: [

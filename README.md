@@ -20,9 +20,80 @@ Built with React 18, TypeScript/JavaScript, Vite and Tailwind CSS.
 
 ## Scripts
 
-- `npm start` / `npm run dev` - Vite dev server on http://localhost:3000
-- `npm run build` - production build into `build/`
+- `npm start` / `npm run dev` - Vite dev server on http://localhost:3000 (shows **every** section)
+- `npm run build` - production build, mode taken from `.env.production`
+- `npm run build:public` - same, but fails if the flag is not `public`
+- `npm run build:internal` - same, but fails if the flag is not `internal`
+- `npm run verify:public` - scan `build/` for internal-only content
 - `npm run preview` - preview the production build
+
+## Build-time content visibility
+
+Some case-study sections are internal-only. They are excluded at **build time**,
+not hidden with CSS or a runtime toggle, so their prose, tables and Mermaid
+sources never exist in the public output.
+
+### The one file you edit
+
+`.env.production`, at the project root:
+
+```
+PORTFOLIO_CONTENT_MODE=public
+```
+
+| Value | Result |
+| --- | --- |
+| `public` | Deployable build. The five internal-only sections are absent from `build/`. |
+| `internal` | Private build containing the complete case studies, written to `build-internal/`. |
+| missing | Fails closed to `public`. |
+| anything else | The build aborts with an error. |
+
+`npm run dev` ignores the flag and always shows all sections.
+
+### Commands and output
+
+| Command | Reads | Output | Safe to deploy |
+| --- | --- | --- | --- |
+| `npm run dev` | - (always internal) | dev server | - |
+| `npm run build` | `.env.production` | `build/` or `build-internal/` | only if the flag was `public` |
+| `npm run build:public` | `.env.production` (must be `public`) | `build/` | yes |
+| `npm run build:internal` | `.env.production` (must be `internal`) | `build-internal/` | **never** |
+
+`build-internal/` is git-ignored and must not be deployed. Each build clears its
+own output directory first, and `npm run build` also runs `verify:public`
+automatically when it produces a public build.
+
+### How it works
+
+1. `src/content/caseStudies/fangtooth-0N.ts` holds only publicly visible blocks.
+2. `src/content/caseStudies/internal/*.internal.ts` holds internal-only blocks
+   in a separate module. Nothing public may import it.
+3. `registry.public.ts` imports the public bodies only; `registry.internal.ts`
+   also imports the internal groups and re-inserts them at the position given by
+   each group's `afterSectionId`.
+4. `vite.config.js` resolves the alias `@case-study-bodies` to one of those two
+   registries based on the flag. The public build therefore has no import path
+   to the internal modules, so Rollup cannot emit them.
+5. `src/content/caseStudies/outline.ts` derives section numbers, subsection
+   letters and the table of contents from whichever sections survive, so
+   removing a section renumbers everything after it automatically.
+
+Anchor ids are text-based (`overview`, `key-architectural-decisions`), never
+number-based. Older numbered anchors such as `#4-three-integration-workflows`
+are kept as empty alias elements inside public headings only.
+
+### Marking another section internal-only
+
+1. Move its blocks (verbatim, including the `heading(...)` line) out of
+   `fangtooth-0N.ts` into `internal/fangtooth-0N.internal.ts`, inside a group
+   whose `afterSectionId` is the `id` of the **public section it follows**.
+2. Give the heading a `legacyId` if it currently had a numeric prefix, so old
+   deep links keep working in internal builds.
+3. Add one distinctive string from the moved text to
+   `INTERNAL_ONLY_SENTINELS` in `scripts/verify-public-build.mjs`.
+
+No renumbering is ever needed by hand.
+
 
 ## Stack
 

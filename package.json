@@ -18,7 +18,10 @@
   "scripts": {
     "start": "vite",
     "dev": "vite",
-    "build": "vite build",
+    "build": "node scripts/build.mjs",
+    "build:public": "node scripts/build.mjs public",
+    "build:internal": "node scripts/build.mjs internal",
+    "verify:public": "node scripts/verify-public-build.mjs",
     "preview": "vite preview"
   },
   "browserslist": {

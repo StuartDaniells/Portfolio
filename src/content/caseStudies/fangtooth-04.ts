@@ -1,13 +1,13 @@
 import { b, c, heading, i, t, type CaseStudyBlock } from "./types";
 
 /**
- * Fangtooth Case Study 04 — LLM Orchestration & RAG.
+ * Fangtooth Case Study 04 - LLM Orchestration & RAG.
  * Extracted from the approved source document. Review-only sections,
  * private repository links, and engineering verification sections are
  * excluded.
  */
 export const body: CaseStudyBlock[] = [
-  heading(2, "1. Overview"),
+  heading(2, "Overview", "1-overview"),
 
   {
     kind: "paragraph",
@@ -44,7 +44,7 @@ export const body: CaseStudyBlock[] = [
     ],
   },
 
-  heading(2, "2. System Architecture"),
+  heading(2, "System Architecture", "2-system-architecture"),
 
   {
     kind: "mermaid",
@@ -86,7 +86,7 @@ export const body: CaseStudyBlock[] = [
     RAG <-->|"Top-K file-scoped retrieval"| Q
     RAG -->|"Stream chat completion"| O
     RAG -->|"Content / thinking events"| GW
-    GW -->|"External provider path — no Qdrant retrieval"| EXT
+    GW -->|"External provider path - no Qdrant retrieval"| EXT
     EXT --> PROVIDERS
     EXT -->|"Normalized stream events"| GW
     GW -->|"OpenAI-style SSE chunks"| CHAT
@@ -116,7 +116,7 @@ export const body: CaseStudyBlock[] = [
     ],
   },
 
-  heading(2, "3. The Engineering Challenge"),
+  heading(2, "The Engineering Challenge", "3-the-engineering-challenge"),
 
   {
     kind: "paragraph",
@@ -163,7 +163,7 @@ export const body: CaseStudyBlock[] = [
     ],
   },
 
-  heading(2, "4. Document Ingestion & Retrieval"),
+  heading(2, "Document Ingestion & Retrieval", "4-document-ingestion-retrieval"),
 
   {
     kind: "paragraph",
@@ -220,7 +220,7 @@ export const body: CaseStudyBlock[] = [
     ],
   },
 
-  heading(2, "5. Financial Data Context — Distinct from RAG"),
+  heading(2, "Financial Data Context - Distinct from RAG", "5-financial-data-context-distinct-from-rag"),
 
   {
     kind: "paragraph",
@@ -271,116 +271,7 @@ export const body: CaseStudyBlock[] = [
     ],
   },
 
-  heading(2, "6. Backend Orchestration & Streaming Lifecycle"),
-
-  {
-    kind: "paragraph",
-    segments: [
-      t(
-        "The Python API gateway controls the chat lifecycle: validates the request, locates the engagement/company workspace, resolves selected financial sources, determines the connector and model, assembles conversation context, streams inference results, and persists the exchange."
-      ),
-    ],
-  },
-  {
-    kind: "mermaid",
-    label: "Backend orchestration and streaming lifecycle sequence",
-    chart: `sequenceDiagram
-    autonumber
-    participant UI as Excel AI Chat UI
-    participant API as FastAPI API Gateway
-    participant DB as SQLite Thread Store
-    participant FIN as Financial Query Formulator
-    participant RAG as RAG Retrieval / Inference
-    participant Q as Qdrant
-    participant O as Ollama
-    participant EXT as External LLM Provider
-
-    UI->>API: POST /api/fangtooth_ai/stream_chat
-    API->>DB: Resolve workspace / create or load thread
-    opt Selected financial sources
-        API->>FIN: resolveChatSources(source selectors)
-        FIN-->>API: Structured data + completeness + errors
-    end
-    API->>DB: Load bounded prior conversation (if enabled)
-    DB-->>API: Relevant recent messages
-
-    alt Fangtooth self-hosted model, RAG enabled
-        API->>RAG: stream_chat() with selected data and history
-        RAG->>Q: Similarity search with optional file filter
-        Q-->>RAG: Retrieved passages
-        Note over RAG,O: Assemble system prompt, data, passages,
-        Note over RAG,O: recent history and current message
-        RAG->>O: Stream selected chat model
-        O-->>RAG: Content / optional reasoning deltas
-        RAG-->>API: Normalized content / reasoning events
-    else Fangtooth self-hosted model, RAG disabled
-        API->>RAG: stream_chat() without retrieval
-        RAG->>O: Stream current message with structured context
-        O-->>RAG: Content / optional reasoning deltas
-        RAG-->>API: Normalized events
-    else External AI provider
-        Note over API,EXT: No Qdrant retrieval on this route
-        API->>EXT: System prompt + bounded history + inline supported file text + structured data
-        EXT-->>API: Provider-native streaming response
-    end
-
-    API-->>UI: SSE chat.completion.chunk events
-    API->>DB: Persist user message and assistant response
-    API-->>UI: Final chunk + [DONE]`,
-    outline: [
-      "The chat UI posts to the streaming endpoint; the gateway resolves the workspace and thread.",
-      "Selected financial sources are resolved deterministically and attached with completeness and errors.",
-      "The self-hosted path retrieves from Qdrant and streams from Ollama; RAG can be disabled.",
-      "The external provider path skips Qdrant and streams provider-native responses.",
-      "The UI receives normalized SSE chunks, and the exchange is persisted.",
-    ],
-  },
-  {
-    kind: "note",
-    segments: [
-      t("The sequence is an architectural simplification of the implemented chat route. On the Ollama branch, "),
-      c("rag/retrieve.py"),
-      t(" owns both retrieval and inference. The UI receives normalized SSE events; "),
-      c("AI Insights"),
-      t(" uses a different token-oriented SSE contract."),
-    ],
-  },
-  {
-    kind: "paragraph",
-    segments: [b("Representative endpoints")],
-  },
-  {
-    kind: "table",
-    headers: [[b("API (production prefix shown)")], [b("Function")]],
-    rows: [
-      [
-        [c("GET /api/fangtooth_ai/workspace_thread_names")],
-        [t("Retrieve or provision workspace and list threads.")],
-      ],
-      [
-        [c("POST /api/fangtooth_ai/upload_docs")],
-        [t("Upload and ingest documents or retain images for chat-time handling.")],
-      ],
-      [
-        [c("POST /api/fangtooth_ai/stream_chat")],
-        [t("Build context, route the selected model, and stream AI Chat responses.")],
-      ],
-      [
-        [c("POST /api/fangtooth_ai/workspace_thread_chat_history")],
-        [t("Retrieve persisted thread messages.")],
-      ],
-      [
-        [c("POST /api/ai-insights/analyze")],
-        [t("Run configured AI Insights analysis with provider-specific streaming.")],
-      ],
-      [
-        [c("GET /api/ai-insights/connectors/models")],
-        [t("Enumerate configured provider/model options.")],
-      ],
-    ],
-  },
-
-  heading(2, "7. Model and Provider Routing"),
+  heading(2, "Model and Provider Routing", "7-model-and-provider-routing"),
 
   {
     kind: "paragraph",
@@ -422,7 +313,7 @@ export const body: CaseStudyBlock[] = [
     ],
   },
 
-  heading(2, "8. Key Architectural Decisions"),
+  heading(2, "Key Architectural Decisions", "8-key-architectural-decisions"),
 
   {
     kind: "paragraph",
@@ -504,7 +395,7 @@ export const body: CaseStudyBlock[] = [
     ],
   },
 
-  heading(2, "9. Engineering Trade-offs and Limitations"),
+  heading(2, "Engineering Trade-offs and Limitations", "9-engineering-trade-offs-and-limitations"),
 
   {
     kind: "paragraph",
@@ -561,7 +452,7 @@ export const body: CaseStudyBlock[] = [
     ],
   },
 
-  heading(2, "10. Outcome"),
+  heading(2, "Outcome", "10-outcome"),
 
   {
     kind: "paragraph",
@@ -588,13 +479,5 @@ export const body: CaseStudyBlock[] = [
         ": Fangtooth computes financial results through its analytics engine, retrieves relevant documentary context when appropriate, and orchestrates how the model receives and explains that information."
       ),
     ],
-  },
-  {
-    kind: "paragraph",
-    segments: [
-      t(
-        "No quantified improvements in answer accuracy, latency, token cost, task completion, or retrieval quality are claimed because no verified benchmarks have been supplied."
-      ),
-    ],
-  },
+  }
 ];
