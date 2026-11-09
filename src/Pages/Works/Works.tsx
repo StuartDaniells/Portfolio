@@ -1,5 +1,5 @@
 import { alumapower, fangtooth, worksOrganizations } from "../../content/works";
-import Footer from "../../Share/Footer";
+// import Footer from "../../Share/Footer";
 import PageMeta from "../../Share/PageMeta";
 import OrganizationSection from "./OrganizationSection";
 import AlumaPowerPlatformMap from "./diagrams/AlumaPowerPlatformMap";
@@ -63,7 +63,7 @@ const Works = () => {
             </div>
           </div>
 
-          <Footer className="bg-[#F8FBFB] dark:bg-[#212425]" />
+          {/* <Footer className="bg-[#F8FBFB] dark:bg-[#212425]" /> */}
         </div>
       </section>
     </main>

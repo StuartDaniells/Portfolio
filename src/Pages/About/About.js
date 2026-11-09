@@ -2,7 +2,7 @@ import { FaEnvelopeOpenText, FaMapMarkerAlt } from "react-icons/fa";
 // Shared legacy sheet: the react-modal overlay styles and `.linked`, which the
 // header uses for its active item. It is currently loaded through this page only.
 import "../../Share/Style.css";
-import Footer from "../../Share/Footer";
+// import Footer from "../../Share/Footer";
 import UseData from "../../Hooks/UseData";
 import AboutCard from "./AboutCard";
 import PageTitle from "../../Share/PageTitle";
@@ -106,7 +106,7 @@ const About = () => {
             </div>
 
             {/* Common Footer call here */}
-            <Footer className="bg-white dark:bg-transparent" />
+            {/* <Footer className="bg-white dark:bg-transparent" /> */}
           </div>
         </div>
       </section>

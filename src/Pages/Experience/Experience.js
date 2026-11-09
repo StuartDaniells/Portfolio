@@ -1,4 +1,4 @@
-import Footer from "../../Share/Footer";
+// import Footer from "../../Share/Footer";
 import PageTitle from "../../Share/PageTitle";
 import EducationCards from "./EducationCards";
 import ExperienceTimeline from "./ExperienceTimeline";
@@ -43,7 +43,7 @@ const Experience = () => {
           {/* End experience */}
 
           {/* call footer */}
-          <Footer className="bg-white dark:bg-transparent" />
+          {/* <Footer className="bg-white dark:bg-transparent" /> */}
         </div>
       </section>
     </main>

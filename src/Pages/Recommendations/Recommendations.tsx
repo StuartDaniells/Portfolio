@@ -1,6 +1,6 @@
 import { recommendations } from "../../content/recommendations";
 import UseData from "../../Hooks/UseData";
-import Footer from "../../Share/Footer";
+// import Footer from "../../Share/Footer";
 import PageMeta from "../../Share/PageMeta";
 import RecommendationCard from "./RecommendationCard";
 
@@ -49,7 +49,7 @@ const Recommendations = () => {
             </div>
           </div>
 
-          <Footer className="bg-[#F8FBFB] dark:bg-[#212425]" />
+          {/* <Footer className="bg-[#F8FBFB] dark:bg-[#212425]" /> */}
         </div>
       </section>
     </main>

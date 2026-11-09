@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import { Link, useParams } from "react-router-dom";
 import { getCaseStudyBody } from "../../../content/caseStudies";
 import { getOrganization, getStudy } from "../../../content/works";
-import Footer from "../../../Share/Footer";
+// import Footer from "../../../Share/Footer";
 import PageMeta from "../../../Share/PageMeta";
 import CaseStudyBody from "./CaseStudyBody";
 import CaseStudyHeader from "./CaseStudyHeader";
@@ -16,7 +16,7 @@ const PageShell = ({ children }: { children: ReactNode }) => (
         <div className="container px-4 sm:px-5 md:px-10 lg:px-[60px]">
           <div className="py-12">{children}</div>
         </div>
-        <Footer className="bg-[#F8FBFB] dark:bg-[#212425]" />
+        {/* <Footer className="bg-[#F8FBFB] dark:bg-[#212425]" /> */}
       </div>
     </section>
   </main>

@@ -1,5 +1,5 @@
 import UseData from "../../Hooks/UseData";
-import Footer from "../../Share/Footer";
+// import Footer from "../../Share/Footer";
 import PageTitle from "../../Share/PageTitle";
 import CommonContact from "./CommonContact";
 
@@ -62,7 +62,7 @@ const Contact = () => {
           {/* End contact */}
 
           {/* Common Footer call here */}
-          <Footer className="bg-[#F8FBFB] dark:bg-[#212425]" />
+          {/* <Footer className="bg-[#F8FBFB] dark:bg-[#212425]" /> */}
         </div>
       </section>
     </>
