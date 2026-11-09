@@ -51,11 +51,7 @@ const CommonContact = () => {
     >
       <h3 className="text-4xl  ">
         <span className="text-gray-lite dark:text-[#A6A6A6] ">
-          I'm always open to discussing product
-        </span>
-        <br />
-        <span className="font-semibold dark:text-white">
-          design work or partnerships.
+          Always open to discussing new opportunities, innovative projects, and meaningful collaborations.
         </span>
       </h3>
 
