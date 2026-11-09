@@ -238,7 +238,7 @@ export const body: CaseStudyBlock[] = [
     kind: "paragraph",
     segments: [
       t(
-        "The resulting engagement data is attached to the prompt with information about its origin and completeness. The implementation also reports unavailable sources as missing rather than silently treating them as zero or empty results. For follow-up questions, source selectors can be carried forward from the thread's earlier messages."
+        "The resulting engagement data is attached to the prompt with information about its origin and completeness. The implementation also reports unavailable sources as missing rather than silently treating them as zero or empty results. For follow up questions, source selectors can be carried forward from the thread's earlier messages."
       ),
     ],
   },
@@ -434,7 +434,7 @@ export const body: CaseStudyBlock[] = [
         t(" SQLite persists messages, but model input uses a bounded recent-history window, and history is omitted when "),
         c("rag_enabled=false"),
         t(
-          " in the reviewed route. This is a deliberate responsiveness/context-cost trade-off, not comprehensive long-term memory."
+          " in the reviewed route. This is a deliberate responsiveness/context-cost trade-off, not comprehensive long term memory."
         ),
       ],
       [

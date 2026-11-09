@@ -110,31 +110,67 @@ export const alumapower: WorksOrganization = {
   name: "AlumaPower",
   role: "Data & Cloud Engineer · Full-Stack Developer",
   summary:
-    "Industrial telemetry and enterprise software delivery: ingesting operational data and building the applications that sit on top of it.",
+    "At AlumaPower, I built software that connected industrial research with day to day operations: remote monitoring and control of experimental power systems, faster experiment analysis, reliable access to research data, and applications that reduced manual coordination across teams. These are four distinct initiatives, each with different engineering constraints and outcomes.",
   studies: [
     {
       id: "01",
       orgId: "alumapower",
-      slug: "industrial-telemetry",
-      articleTitle: "Industrial telemetry",
-      title: "Industrial telemetry",
-      focus: "Ingestion · operational data",
-      stack: ["Python", "SQL", "Azure"],
-      teaser: "Placeholder chapter. Not published.",
-      takeaway: "Placeholder chapter. Not published.",
-      status: "placeholder",
+      slug: "ops-vista-2-industrial-iot",
+      articleTitle:
+        "Architecting Ops Vista 2.0: A Schema Driven Industrial Telemetry Platform",
+      title: "Industrial IoT & Real-Time Telemetry",
+      focus: "Industrial IoT · real-time telemetry",
+      stack: ["Vue3", "Python", "MQTT", "Protobuf", "Azure Data Explorer (ADX)", "Kusto Query Language (KQL)", "Azure App Service", "Azure Functions", "Azure Key Vault", "MongoDB Atlas", "Node.js", "FastAPI", "pm2 process manager", "Grafana", "Azure Web PubSub (WebSocket)"],
+      teaser:
+        "Evolved CLI-based telemetry into schema driven live monitoring, remote control and selective historical analysis across two independently deployed hardware services.",
+      takeaway:
+        "Preserves raw telemetry in Azure Data Explorer as the system of record while streaming a compact live projection to the UI and persisting only requested decoded history, across two hardware specific service boundaries.",
+      status: "published",
     },
     {
       id: "02",
       orgId: "alumapower",
-      slug: "enterprise-applications",
-      articleTitle: "Enterprise applications",
-      title: "Enterprise applications",
-      focus: "Full-stack · line-of-business",
-      stack: ["Full-stack", "SQL", "Azure"],
-      teaser: "Placeholder chapter. Not published.",
-      takeaway: "Placeholder chapter. Not published.",
-      status: "placeholder",
+      slug: "experiment-analysis-automation",
+      articleTitle:
+        "Automating Experiment Analysis: From Manual Spreadsheets to Repeatable Results",
+      title: "Experiment Analysis Automation",
+      focus: "Data engineering · experiment automation",
+      stack: ["Python", "ETL Data pipelines", "MongoDB", "Data validation and clean-up", "Analysis and Report automation", "Node.js"],
+      teaser:
+        "Replaced manual data cleanup and spreadsheet analysis with a repeatable Python workflow; testing staff reported roughly 45 minutes to 7 seconds per experiment.",
+      takeaway:
+        "A repeatable Python workflow replaced per-experiment file imports, cleanup and chart rebuilding, so testing staff moved from roughly 45 minutes to about 7 seconds of preparation per experiment.",
+      status: "published",
+    },
+    {
+      id: "03",
+      orgId: "alumapower",
+      slug: "data-infrastructure-modernization",
+      articleTitle:
+        "Modernizing Data Infrastructure: Centralized Research Data, Backups and Recovery",
+      title: "Data Infrastructure & Recovery",
+      focus: "Database infrastructure · backup & recovery",
+      stack: ["MongoDB Atlas", "Python", "Windows Server", "Cron jobs", "Scheduled backups", "Recovery verification", "Point in time recovery", "Node.js", "Web templating", "pm2 process manager"],
+      teaser:
+        "Centralized experimental and business data, migrated MongoDB workloads to Atlas, and implemented automated backups and shared application hosting.",
+      takeaway:
+        "Standardized scattered lab data into central stores, moved MongoDB workloads to Atlas, and added scheduled backups so research data survived individual machine failures.",
+      status: "published",
+    },
+    {
+      id: "04",
+      orgId: "alumapower",
+      slug: "enterprise-workflow-applications",
+      articleTitle:
+        "Engineering Enterprise Applications: Making Operational Workflows Easier to Run",
+      title: "Enterprise Applications & Workflows",
+      focus: "Workflow engineering · Microsoft 365 integration",
+      stack: ["Vue", "Node.js", "SharePoint", "Power Automate", "Power Apps", "Power Platform Development", "Microsoft Graph API"],
+      teaser:
+        "Built internal tools and contextual SharePoint file-routing automation, replacing manual link lookup and document placement across departments.",
+      takeaway:
+        "Separated custom web-app logic from document placement so Power Automate files attachments by submission context instead of hand-maintained link lists.",
+      status: "published",
     },
   ],
 };

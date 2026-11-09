@@ -8,6 +8,14 @@ import { internalSections as fangtooth01Internal } from "./internal/fangtooth-01
 import { internalSections as fangtooth02Internal } from "./internal/fangtooth-02.internal";
 import { internalSections as fangtooth03Internal } from "./internal/fangtooth-03.internal";
 import { internalSections as fangtooth04Internal } from "./internal/fangtooth-04.internal";
+import { body as alumapower01 } from "./alumapower-01";
+import { body as alumapower02 } from "./alumapower-02";
+import { body as alumapower03 } from "./alumapower-03";
+import { body as alumapower04 } from "./alumapower-04";
+import { internalSections as alumapower01Internal } from "./internal/alumapower-01.internal";
+import { internalSections as alumapower02Internal } from "./internal/alumapower-02.internal";
+import { internalSections as alumapower03Internal } from "./internal/alumapower-03.internal";
+import { internalSections as alumapower04Internal } from "./internal/alumapower-04.internal";
 
 /**
  * Internal case-study registry.
@@ -31,4 +39,8 @@ export const { caseStudyBodies, getCaseStudyBody } = makeRegistry({
   "configuration-driven-analytics": withInternal(fangtooth02, fangtooth02Internal),
   "serverless-cloud-gateway": withInternal(fangtooth03, fangtooth03Internal),
   "llm-orchestration-rag": withInternal(fangtooth04, fangtooth04Internal),
+  "ops-vista-2-industrial-iot": withInternal(alumapower01, alumapower01Internal),
+  "experiment-analysis-automation": withInternal(alumapower02, alumapower02Internal),
+  "data-infrastructure-modernization": withInternal(alumapower03, alumapower03Internal),
+  "enterprise-workflow-applications": withInternal(alumapower04, alumapower04Internal),
 });

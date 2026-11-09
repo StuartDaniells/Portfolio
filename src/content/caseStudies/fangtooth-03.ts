@@ -140,7 +140,7 @@ export const body: CaseStudyBlock[] = [
     segments: [
       b("Keep session bootstrap independent of backend installation."),
       t(
-        " The browser-facing frontend calls Azure Functions directly for sign-in and session claiming, allowing a first-time user to authenticate and obtain an installer before a local service exists."
+        " The browser facing frontend calls Azure Functions directly for sign-in and session claiming, allowing a first-time user to authenticate and obtain an installer before a local service exists."
       ),
     ],
   },

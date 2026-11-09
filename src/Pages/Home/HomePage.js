@@ -13,7 +13,7 @@ const HomePage = () => {
       <PageTitle
         title="Home"
         documentTitle="Stuart Daniells | Software Engineer - AI, Cloud & Data Engineering"
-        description="Stuart Daniells: 6+ years of software engineering experience, specializing in AI engineering, cloud services, and real-time data pipelines"
+        description="Stuart Daniells: 6+ years of software engineering experience, specializing in AI engineering, cloud services, and real time data pipelines"
       />
       {/* End pagetitle */}
 
@@ -35,7 +35,7 @@ const HomePage = () => {
             6+ years in software engineering
           </p>
           <p className="mx-auto mt-5 w-full max-w-[40rem] rounded-xl border border-[#E3E3E3] bg-white/80 p-5 text-left text-sm leading-6 text-[#7B7B7B] shadow-sm dark:border-[#3D3A3A] dark:bg-[#1D1D1D]/90 dark:text-[#A6A6A6] sm:mt-6 sm:p-6 sm:text-base sm:leading-7">
-            I architect and build scalable cloud services, data intensive platforms and AI powered applications: from real-time industrial
+            I architect and build scalable cloud services, data intensive platforms and AI powered applications: from real time industrial
             telemetry to financial analytics. My focus is on thoughtful architecture, performance, and engineering reliable, maintainable systems.
           </p>
           <p className="mt-5 text-sm font-medium text-[#7B7B7B] dark:text-[#A6A6A6] sm:mt-6 sm:text-base">

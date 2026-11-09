@@ -11,11 +11,11 @@ import {
 import { ToastContainer } from "react-toastify";
 import ContextProvider from "./Context/ContextProvider";
 import About from "./Pages/About/About";
-import Blog from "./Pages/Blog/Blog";
 import Contact from "./Pages/Contact/Contact";
 import Experience from "./Pages/Experience/Experience";
 import Home from "./Pages/Home/Home";
 import HomePage from "./Pages/Home/HomePage";
+import Recommendations from "./Pages/Recommendations/Recommendations";
 import CaseStudyPage from "./Pages/Works/CaseStudy/CaseStudyPage";
 import Works from "./Pages/Works/Works";
 import NotFound from "./Share/NotFound";
@@ -47,7 +47,12 @@ function App() {
               <Route path="resume" element={<Experience />} />
               <Route path="about" element={<About />} />
               <Route path="contact" element={<Contact />} />
-              <Route path="blogs" element={<Blog />} />
+              <Route path="recommendations" element={<Recommendations />} />
+              {/* Legacy route: the Blogs page was replaced by Recommendations. */}
+              <Route
+                path="blogs"
+                element={<Navigate to="/home/recommendations" replace />}
+              />
               <Route path="works">
                 <Route index element={<Works />} />
                 <Route path=":orgSlug" element={<OrganizationRedirect />} />

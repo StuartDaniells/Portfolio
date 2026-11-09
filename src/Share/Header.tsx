@@ -26,7 +26,7 @@ const Header = () => {
       <div className="container">
         {/* Header menu start  */}
         <header
-          className={`flex justify-between items-center sticky top-0 left-0 w-full z-[1111111111] transition-all duration-300 ease-in-out ${
+          className={`flex justify-between items-center sticky top-0 left-0 w-full z-40 transition-all duration-300 ease-in-out ${
             scrolled
               ? "bg-gradient-to-b from-white/85 via-white/45 to-transparent backdrop-blur-sm dark:from-[#111111]/85 dark:via-[#111111]/45 dark:to-transparent"
               : "bg-[#F3F6F6] dark:bg-black lg:bg-transparent lg:dark:bg-transparent"

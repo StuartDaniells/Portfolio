@@ -1,6 +1,6 @@
 import { FaEnvelopeOpenText, FaMapMarkerAlt } from "react-icons/fa";
-// Shared legacy sheet: .linked (Header), scrollbar and text-2line helpers
-// (Blogs). It is currently loaded through this page only.
+// Shared legacy sheet: the react-modal overlay styles and `.linked`, which the
+// header uses for its active item. It is currently loaded through this page only.
 import "../../Share/Style.css";
 import Footer from "../../Share/Footer";
 import UseData from "../../Hooks/UseData";

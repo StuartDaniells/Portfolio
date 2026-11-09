@@ -7,4 +7,3 @@ declare module "*.svg";
 
 declare module "aos";
 declare module "react-modal";
-declare module "react-slick";

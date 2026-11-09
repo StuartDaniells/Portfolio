@@ -1,31 +1,10 @@
 import React, { useEffect, useState } from "react";
 
-// blog post images
-import blog6 from "../assets/images/blog_images/6.jpg";
-import blog4 from "../assets/images/blog_images/4.jpg";
-import blog2 from "../assets/images/blog_images/2.jpg";
-import blog1 from "../assets/images/blog_images/1.jpg";
-import blog3 from "../assets/images/blog_images/3.jpg";
-import blog5 from "../assets/images/blog_images/5.jpg";
-// blog image small
-import blogSmall6 from "../assets/images/blog_images/small/6.jpg";
-import blogSmall4 from "../assets/images/blog_images/small/4.jpg";
-import blogSmall2 from "../assets/images/blog_images/small/2.jpg";
-import blogSmall1 from "../assets/images/blog_images/small/1.jpg";
-import blogSmall3 from "../assets/images/blog_images/small/3.jpg";
-import blogSmall5 from "../assets/images/blog_images/small/5.jpg";
-
-import img1 from "../assets/images/slider/brand-1.png";
-import img2 from "../assets/images/slider/brand-2.png";
-import img3 from "../assets/images/slider/brand-3.png";
-import img4 from "../assets/images/slider/brand-4.png";
-import img5 from "../assets/images/slider/brand-5.png";
 // contact image
-import iconPhone from "../assets/images/contact/phone-call 1.png";
 import iconEmail from "../assets/images/contact/email 1.png";
 import iconMap from "../assets/images/contact/map 1.png";
 import { CgNotes } from "react-icons/cg";
-import { FaBlogger, FaRegUser } from "react-icons/fa";
+import { FaQuoteLeft, FaRegUser } from "react-icons/fa";
 import { AiOutlineHome } from "react-icons/ai";
 // line icons used by the About page capability cards
 import {
@@ -37,17 +16,6 @@ import {
 } from "react-icons/fi";
 import { RiContactsBookLine } from "react-icons/ri";
 import { Link, useLocation } from "react-router-dom";
-
-export interface BlogItem {
-  id: string;
-  img: any;
-  imgSmall: any;
-  date: string;
-  category: string;
-  title: string;
-  bg: string;
-  description: string;
-}
 
 export interface MenuItem {
   id: string;
@@ -104,8 +72,6 @@ export interface ContactItem {
 const AllData = () => {
   const [check, setCheck] = useState(false);
   const [local, setLocal] = useState<string | null>(localStorage.getItem("theme"));
-  const [singleData, setSingleData] = useState<any>({});
-  const [isOpen, setIsOpen] = useState(false);
 
   // dark and light theme controls
   useEffect(() => {
@@ -138,86 +104,6 @@ const AllData = () => {
     localStorage?.getItem("theme") === "dark"
       ? document.documentElement.classList.add("dark")
       : document.documentElement.classList.remove("dark");
-  };
-
-  // The Works index reads its metadata from src/content/works.ts instead of
-  // page-local demo data. Blog content below still feeds the Blog modal.
-
-  // Elements for Blogs section
-  const blogsData: BlogItem[] = [
-    {
-      id: "1",
-      img: blog1,
-      imgSmall: blogSmall1,
-      date: "177 April",
-      category: "Inspiration",
-      title: "How to Own Your Audience by Creating an Email List.",
-      bg: "#FCF4FF",
-      description:
-        "Lorem ipsum dolor, sit amet consectetur adipisicing  elit. Fuga consequatur delectus porro sapiente molestias, magni quasi sed, enim corporis omnis doloremque soluta inventore dolorum conseqr quo obcaecati rerum sit non. Lorem ipsum dolor, sit amet consectetur adipisicing  elit. Fuga consequatur delectus porro sapiente molestias, magni quasi sed, enim corporis omnis doloremque soluta inventore dolorum consequuntur quo obcaecati rerum sit non. \n Lorem ipsum dolor, sit amet consectetur adipisicing  elit. Fuga consequatur delectus porro sapiente molestias, magni quasi sed, enim corporis omnis doloremque soluta inventore dolorum consetur quo obcaecati rerum sit non. Lorem ipsum dolor, sit amet consectetur adipisicing  elit. Fuga consequatur delectus porro sapiente molestias, magni quasi sed, sit amet consectetur adipisicing  elit. Fuga consequatur delectus porro sapiente molestias, magni quasi sed, enim corporis omnis doloremque soluta inventore dolorum consequuntur. \n Lorem ipsum dolor, sit amet consectetur adipisicing  elit. Fuga consequatur delectus porro sapiente molestias, magni quasi sed, enim corporis omnis doloremque soluta inventore dolorum consequuntur quo obcaecati rerum sit non. ",
-    },
-    {
-      id: "4",
-      img: blog4,
-      imgSmall: blogSmall4,
-      date: "000 April",
-      category: "Inspiration",
-      title: "Everything You Need to Know About Web Accessibility.",
-      bg: "#EEFBFF",
-      description:
-        "Lorem ipsum dolor, sit amet consectetur adipisicing  elit. Fuga consequatur delectus porro sapiente molestias, magni quasi sed, enim corporis omnis doloremque soluta inventore dolorum conseqr quo obcaecati rerum sit non. Lorem ipsum dolor, sit amet consectetur adipisicing  elit. Fuga consequatur delectus porro sapiente molestias, magni quasi sed, enim corporis omnis doloremque soluta inventore dolorum consequuntur quo obcaecati rerum sit non. \n Lorem ipsum dolor, sit amet consectetur adipisicing  elit. Fuga consequatur delectus porro sapiente molestias, magni quasi sed, enim corporis omnis doloremque soluta inventore dolorum consetur quo obcaecati rerum sit non. Lorem ipsum dolor, sit amet consectetur adipisicing  elit. Fuga consequatur delectus porro sapiente molestias, magni quasi sed, sit amet consectetur adipisicing  elit. Fuga consequatur delectus porro sapiente molestias, magni quasi sed, enim corporis omnis doloremque soluta inventore dolorum consequuntur. \n Lorem ipsum dolor, sit amet consectetur adipisicing  elit. Fuga consequatur delectus porro sapiente molestias, magni quasi sed, enim corporis omnis doloremque soluta inventore dolorum consequuntur quo obcaecati rerum sit non. ",
-    },
-    {
-      id: "2",
-      img: blog2,
-      imgSmall: blogSmall2,
-      date: "21 April",
-      category: "Web Design",
-      title: "The window know to say beside you",
-      bg: "#FFF0F0",
-      description:
-        "Lorem ipsum dolor, sit amet consectetur adipisicing  elit. Fuga consequatur delectus porro sapiente molestias, magni quasi sed, enim corporis omnis doloremque soluta inventore dolorum conseqr quo obcaecati rerum sit non. Lorem ipsum dolor, sit amet consectetur adipisicing  elit. Fuga consequatur delectus porro sapiente molestias, magni quasi sed, enim corporis omnis doloremque soluta inventore dolorum consequuntur quo obcaecati rerum sit non. \n Lorem ipsum dolor, sit amet consectetur adipisicing  elit. Fuga consequatur delectus porro sapiente molestias, magni quasi sed, enim corporis omnis doloremque soluta inventore dolorum consetur quo obcaecati rerum sit non. Lorem ipsum dolor, sit amet consectetur adipisicing  elit. Fuga consequatur delectus porro sapiente molestias, magni quasi sed, sit amet consectetur adipisicing  elit. Fuga consequatur delectus porro sapiente molestias, magni quasi sed, enim corporis omnis doloremque soluta inventore dolorum consequuntur. \n Lorem ipsum dolor, sit amet consectetur adipisicing  elit. Fuga consequatur delectus porro sapiente molestias, magni quasi sed, enim corporis omnis doloremque soluta inventore dolorum consequuntur quo obcaecati rerum sit non. ",
-    },
-    {
-      id: "5",
-      img: blog5,
-      imgSmall: blogSmall5,
-      date: "27 April",
-      category: "Inspiration",
-      title: "Top 10 Toolkits for Deep Learning in 2021.",
-      bg: "#FCF4FF",
-      description:
-        "Lorem ipsum dolor, sit amet consectetur adipisicing  elit. Fuga consequatur delectus porro sapiente molestias, magni quasi sed, enim corporis omnis doloremque soluta inventore dolorum conseqr quo obcaecati rerum sit non. Lorem ipsum dolor, sit amet consectetur adipisicing  elit. Fuga consequatur delectus porro sapiente molestias, magni quasi sed, enim corporis omnis doloremque soluta inventore dolorum consequuntur quo obcaecati rerum sit non. \n Lorem ipsum dolor, sit amet consectetur adipisicing  elit. Fuga consequatur delectus porro sapiente molestias, magni quasi sed, enim corporis omnis doloremque soluta inventore dolorum consetur quo obcaecati rerum sit non. Lorem ipsum dolor, sit amet consectetur adipisicing  elit. Fuga consequatur delectus porro sapiente molestias, magni quasi sed, sit amet consectetur adipisicing  elit. Fuga consequatur delectus porro sapiente molestias, magni quasi sed, enim corporis omnis doloremque soluta inventore dolorum consequuntur. \n Lorem ipsum dolor, sit amet consectetur adipisicing  elit. Fuga consequatur delectus porro sapiente molestias, magni quasi sed, enim corporis omnis doloremque soluta inventore dolorum consequuntur quo obcaecati rerum sit non. ",
-    },
-    {
-      id: "3",
-      img: blog3,
-      imgSmall: blogSmall3,
-      date: "27 April",
-      category: "Inspiration",
-      title: "How to Own Your Audience by Creating an Email List.",
-      bg: "#FCF4FF",
-      description:
-        "Lorem ipsum dolor, sit amet consectetur adipisicing  elit. Fuga consequatur delectus porro sapiente molestias, magni quasi sed, enim corporis omnis doloremque soluta inventore dolorum conseqr quo obcaecati rerum sit non. Lorem ipsum dolor, sit amet consectetur adipisicing  elit. Fuga consequatur delectus porro sapiente molestias, magni quasi sed, enim corporis omnis doloremque soluta inventore dolorum consequuntur quo obcaecati rerum sit non. \n Lorem ipsum dolor, sit amet consectetur adipisicing  elit. Fuga consequatur delectus porro sapiente molestias, magni quasi sed, enim corporis omnis doloremque soluta inventore dolorum consetur quo obcaecati rerum sit non. Lorem ipsum dolor, sit amet consectetur adipisicing  elit. Fuga consequatur delectus porro sapiente molestias, magni quasi sed, sit amet consectetur adipisicing  elit. Fuga consequatur delectus porro sapiente molestias, magni quasi sed, enim corporis omnis doloremque soluta inventore dolorum consequuntur. \n Lorem ipsum dolor, sit amet consectetur adipisicing  elit. Fuga consequatur delectus porro sapiente molestias, magni quasi sed, enim corporis omnis doloremque soluta inventore dolorum consequuntur quo obcaecati rerum sit non. ",
-    },
-    {
-      id: "6",
-      img: blog6,
-      imgSmall: blogSmall6,
-      date: "27 April",
-      category: "Inspiration",
-      title: "Everything You Need to Know About Web Accessibility.",
-      bg: "#EEFBFF",
-      description:
-        "Lorem ipsum dolor, sit amet consectetur adipisicing  elit. Fuga consequatur delectus porro sapiente molestias, magni quasi sed, enim corporis omnis doloremque soluta inventore dolorum conseqr quo obcaecati rerum sit non. Lorem ipsum dolor, sit amet consectetur adipisicing  elit. Fuga consequatur delectus porro sapiente molestias, magni quasi sed, enim corporis omnis doloremque soluta inventore dolorum consequuntur quo obcaecati rerum sit non. \n Lorem ipsum dolor, sit amet consectetur adipisicing  elit. Fuga consequatur delectus porro sapiente molestias, magni quasi sed, enim corporis omnis doloremque soluta inventore dolorum consetur quo obcaecati rerum sit non. Lorem ipsum dolor, sit amet consectetur adipisicing  elit. Fuga consequatur delectus porro sapiente molestias, magni quasi sed, sit amet consectetur adipisicing  elit. Fuga consequatur delectus porro sapiente molestias, magni quasi sed, enim corporis omnis doloremque soluta inventore dolorum consequuntur. \n Lorem ipsum dolor, sit amet consectetur adipisicing  elit. Fuga consequatur delectus porro sapiente molestias, magni quasi sed, enim corporis omnis doloremque soluta inventore dolorum consequuntur quo obcaecati rerum sit non. ",
-    },
-  ];
-
-  // find items for Blogs  modal open
-  const handleBlogsData = (id: string) => {
-    const find = blogsData.find((item) => item?.id === id);
-    setSingleData(find);
-    setIsOpen(true);
   };
 
   // Active navlinks function
@@ -275,9 +161,9 @@ const AllData = () => {
     },
     {
       id: "04",
-      name: "Blogs",
-      link: "/home/blogs",
-      icon: <FaBlogger />,
+      name: "Recommendations",
+      link: "/home/recommendations",
+      icon: <FaQuoteLeft />,
     },
     {
       id: "05",
@@ -285,20 +171,6 @@ const AllData = () => {
       link: "/home/contact",
       icon: <RiContactsBookLine />,
     },
-  ];
-
-  // Slider image for Clients
-  const sliderImg = [
-    img1,
-    img2,
-    img3,
-    img4,
-    img5,
-    img1,
-    img2,
-    img3,
-    img4,
-    img5,
   ];
 
   // Capability cards for the About page
@@ -315,7 +187,7 @@ const AllData = () => {
       id: "2",
       icon: <FiCloud />,
       title: "Cloud & Real-Time Systems",
-      des: "Build cloud hosted, event driven systems that ingest and distribute high frequency data. My work with Azure, MQTT, WebSockets, and efficient serialization (Google ProtoBuf) emphasizes reliability, responsiveness, and operating-cost efficiency.",
+      des: "Build cloud hosted, event driven systems that ingest and distribute high frequency data. My work with Azure, MQTT, WebSockets, and efficient serialization (Google ProtoBuf) emphasizes reliability, responsiveness, and operating cost efficiency.",
       color: "#DDA10C",
       bg: "#FEFAF0",
     },
@@ -364,8 +236,8 @@ const AllData = () => {
       bg: "#F8FBFB",
       highlights: [
         "Implemented a microservice architecture across a Vue.js client, Azure Functions encoder, and Python decoders for horizontal and vertical cell systems, unifying industrial monitoring and control workflows in one application.",
-        "Engineered and optimized production telemetry with MQTT, Protocol Buffers, Azure App Service remote storage, buffered Azure Queue ingestion, Azure Data Explorer (Kusto), MongoDB Atlas, and Azure Web PubSub, decoupling high-frequency ingestion from client updates to improve serialization efficiency and real-time monitoring responsiveness.",
-        "Built a one-click Python Experiment Analysis application that replaced manual file imports, cleaning, Excel queries, and reporting. As a result, test technicians report analysis time fell from ~45 minutes to ~7 seconds per experiment.",
+        "Engineered and optimized production telemetry with MQTT, Protocol Buffers, Azure App Service remote storage, buffered Azure Queue ingestion, Azure Data Explorer (Kusto), MongoDB Atlas, and Azure Web PubSub, decoupling high frequency ingestion from client updates to improve serialization efficiency and real time monitoring responsiveness.",
+        "Built a one click Python Experiment Analysis application that replaced manual file imports, cleaning, Excel queries, and reporting. As a result, test technicians report analysis time fell from ~45 minutes to ~7 seconds per experiment.",
         "Delivered quality management and laboratory systems workflow applications using Vue.js, Node.js, MongoDB, Power Apps, Power Automate, and SharePoint, streamlining document uploads and data handling to reduce repetitive administrative work.",
       ],
     },
@@ -483,27 +355,19 @@ const AllData = () => {
   // Personal information for contact pages
   const contactArray: ContactItem[] = [
     {
-      id: "01",
-      icon: iconPhone,
-      title: "Phone ",
-      item1: "+452 666 386",
-      item2: "+452 666 386",
-      bg: "#FCF4FF",
-    },
-    {
       id: "02",
       icon: iconEmail,
       title: "Email ",
-      item1: "support@gmail.com",
-      item2: "example@gmail.com",
+      item1: "stuart@stuartdaniells.com",
+      item2: "stuart@stuartdaniells.com",
       bg: "#EEFBFF",
     },
     {
       id: "03",
       icon: iconMap,
       title: "Address ",
-      item1: "Maount View, Oval",
-      item2: "Road, New York, USA",
+      item1: "Kitchener-Waterloo Region,",
+      item2: "Ontario, Canada",
       bg: "#F2F4FF",
     },
   ];
@@ -512,15 +376,9 @@ const AllData = () => {
     handleTheme,
     check,
     local,
-    singleData,
-    isOpen,
-    setIsOpen,
-    blogsData,
-    handleBlogsData,
     menuItem,
     NavLink,
     serviceArray,
-    sliderImg,
     educationArray,
     experienceRoleArray,
     skillGroupArray,

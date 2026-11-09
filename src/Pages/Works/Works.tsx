@@ -2,6 +2,7 @@ import { alumapower, fangtooth, worksOrganizations } from "../../content/works";
 import Footer from "../../Share/Footer";
 import PageMeta from "../../Share/PageMeta";
 import OrganizationSection from "./OrganizationSection";
+import AlumaPowerPlatformMap from "./diagrams/AlumaPowerPlatformMap";
 import PlatformMap from "./diagrams/PlatformMap";
 
 const WORKS_DESCRIPTION =
@@ -54,8 +55,10 @@ const Works = () => {
                 <OrganizationSection
                   org={alumapower}
                   number={ordinal(alumapower.id)}
-                  emptyNote="Written case studies for this organization are still in preparation."
-                />
+                  cardsHeading="Explore the Architecture"
+                >
+                  <AlumaPowerPlatformMap />
+                </OrganizationSection>
               </div>
             </div>
           </div>

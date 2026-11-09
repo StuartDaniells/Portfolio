@@ -26,6 +26,16 @@ const INTERNAL_ONLY_SENTINELS = [
   "Backend Orchestration & Streaming Lifecycle",
   "workspace_thread_names",
   "Representative endpoints",
+  // AlumaPower - internal editorial and engineering verification notes
+  "Internal editorial and engineering verification notes",
+  "Owner-confirmed final deployment versus archived code",
+  "ap_sw_ops_vista_vertical_decoder/readme.md",
+  "ap_sw_ops_vista_horizontal_decoder/readme.md",
+  "Metric wording:",
+  "Process, Data & Logic flow Diagram.png",
+  "DBLogsSync-like log synchronization",
+  "transactional sync, or tested failover",
+  "Flow_Multi_Attach_Uploader",
 ];
 
 /** Public content. Proves the scan actually read the bundle. */
