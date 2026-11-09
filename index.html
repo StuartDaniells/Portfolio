@@ -29,6 +29,31 @@
 
 <body>
   <noscript>You need to enable JavaScript to run this app.</noscript>
+
+  <!--
+    Netlify Forms registration form.
+
+    Netlify only parses the static HTML of a deploy, so a form rendered by
+    React (see src/Pages/Contact/CommonContact.js) is invisible to it. This
+    hidden form exists purely so the "contact" form is registered at deploy
+    time; nobody ever sees or posts it.
+
+    Keep the field names below in sync with the visible React form:
+    name, email, message, bot-field.
+  -->
+  <form
+    name="contact"
+    method="POST"
+    data-netlify="true"
+    netlify-honeypot="bot-field"
+    hidden
+  >
+    <input name="name" />
+    <input name="email" type="email" />
+    <textarea name="message"></textarea>
+    <input name="bot-field" />
+  </form>
+
   <div id="root"></div>
   <script type="module" src="/src/index.tsx"></script>
 </body>

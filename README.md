@@ -16,7 +16,7 @@ Built with React 18, TypeScript/JavaScript, Vite and Tailwind CSS.
 | `/home/works/:orgSlug/:studySlug` | Reusable case-study page template |
 | `/home/recommendations` | Written recommendations with expandable text |
 | `/home/blogs` | Legacy route, redirects to `/home/recommendations` |
-| `/home/contact` | Contact details + EmailJS form |
+| `/home/contact` | Contact details + Netlify Forms contact form |
 | `*` | 404 |
 
 ## Scripts
@@ -27,6 +27,44 @@ Built with React 18, TypeScript/JavaScript, Vite and Tailwind CSS.
 - `npm run build:internal` - same, but fails if the flag is not `internal`
 - `npm run verify:public` - scan `build/` for internal-only content
 - `npm run preview` - preview the production build
+
+## Contact form
+
+The contact form on `/home/contact` is handled by **Netlify Forms**. There is no
+backend, no serverless function and no third-party email SDK; the browser posts
+the form to Netlify, which stores the submission and optionally emails you.
+
+Two pieces must stay in sync:
+
+1. `index.html` - a hidden `contact` form (`data-netlify="true"`,
+   `netlify-honeypot="bot-field"`) exists only so Netlify's deploy-time HTML scan
+   registers the form. Netlify never parses React-rendered markup.
+2. `src/Pages/Contact/CommonContact.js` - the visible form. It posts
+   `application/x-www-form-urlencoded` data to `/` with `fetch`, so there is no
+   page reload. It carries the hidden `form-name=contact` and `bot-field`
+   honeypot inputs.
+
+The field names (`name`, `email`, `message`, `bot-field`) must be identical in
+both files; a rename in one without the other silently drops that field from the
+submission.
+
+Builds are deployed by hand, so the form only registers after `build/` has been
+rebuilt **with** the hidden form in `index.html` and uploaded. Submissions do not
+work against `npm run dev` or `npm run preview` - the POST has nowhere to go, so
+the page shows the error toast. Test on a deploy preview or production.
+
+After deploying, in the Netlify UI:
+
+1. **Forms** - confirm the `contact` form is listed.
+2. Submit a test message from the live site and confirm it appears under
+   **Forms > contact**.
+3. **Forms > Submission notifications** - add an email notification to a my
+   Mail address. The recipient must be an active member of the Netlify team.
+4. Confirm the email arrives (check my email spam folder if not). Never put my email
+   credentials or SMTP settings in this repo.
+
+The site is on Netlify Legacy Free, which allows **100 form submissions per site
+per month**.
 
 ## Build-time content visibility
 
@@ -99,7 +137,7 @@ No renumbering is ever needed by hand.
 ## Stack
 
 React 18 · React Router 6 · Vite 5 · Tailwind CSS 3 · AOS · react-icons ·
-react-modal · react-toastify · EmailJS · Mermaid
+react-modal · react-toastify · Netlify Forms · Mermaid
 
 ## Structure
 

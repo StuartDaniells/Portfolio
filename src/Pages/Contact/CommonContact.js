@@ -1,47 +1,56 @@
-import { useRef } from "react";
-import emailjs from "@emailjs/browser";
+import { useRef, useState } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const CommonContact = () => {
   const form = useRef();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // use Email js for recive message
-
-  const sendEmail = (e) => {
+  // Netlify Forms: the hidden registration form in index.html declares the
+  // same field names, which is how Netlify detects this form at deploy time.
+  const sendEmail = async (e) => {
     e.preventDefault();
-    emailjs
-      .sendForm(
-        "service_n4mkhz9",
-        "template_ugoztxr",
-        form.current,
-        "user_vYmDSd9PwIuRXUQEDjYwN"
-      )
-      .then(
-        (result) => {
-          toast.success("Message Sent successfully!", {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
-          document.getElementById("myForm").reset();
-        },
-        (error) => {
-          toast.error("Ops Message not Sent!", {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
-        }
-      );
+
+    if (isSubmitting) return;
+    setIsSubmitting(true);
+
+    try {
+      const formData = new FormData(form.current);
+
+      const response = await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams(formData).toString(),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Netlify Forms responded with ${response.status}`);
+      }
+
+      toast.success("Message sent successfully!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      form.current.reset();
+    } catch (error) {
+      // The entered values are deliberately left in place so the visitor can retry.
+      toast.error("Message could not be sent. Please try again.", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -57,6 +66,14 @@ const CommonContact = () => {
 
       {/* Form Start */}
       <form id="myForm" ref={form} onSubmit={sendEmail}>
+        <input type="hidden" name="form-name" value="contact" />
+        {/* Netlify honeypot: bots fill it in, people never see it. */}
+        <p className="hidden" aria-hidden="true">
+          <label>
+            Leave this field empty
+            <input name="bot-field" tabIndex={-1} autoComplete="off" />
+          </label>
+        </p>
         <div className="relative  z-0 w-full mt-[40px] mb-8 group">
           <input
             type="text"
@@ -75,24 +92,24 @@ const CommonContact = () => {
         <div className="relative z-0 w-full mb-8 group">
           <input
             type="email"
-            name="user_email"
+            name="email"
             className="block autofill:text-red-900 needed py-2.5 px-0 w-full text-sm text-gray-lite bg-transparent border-0 border-b-[2px] border-[#B5B5B5] appearance-none dark:text-white dark:border-[#333333] dark:focus:border-[#FF6464] focus:outline-none focus:ring-0 focus:border-[#5185D4] peer"
             placeholder=" "
-            id="user_email"
+            id="email"
             required
           />
           <label
-            htmlFor="user_email"
+            htmlFor="email"
             className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-color-910 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-[#5185D4] peer-focus:dark:text-[#FF6464] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-8"
           >
             Email *
           </label>
         </div>
         <div className="relative z-0 w-full mb-8 group">
-          <input
-            type="text"
+          <textarea
             name="message"
-            className="block autofill:bg-yellow-200 py-2.5 px-0 w-full text-sm text-gray-lite bg-transparent border-0 border-b-[2px] border-[#B5B5B5] appearance-none dark:text-white dark:border-[#333333] dark:focus:border-[#FF6464] focus:outline-none focus:ring-0 focus:border-[#CA56F2] peer"
+            rows={4}
+            className="block resize-y py-2.5 px-0 w-full text-sm text-gray-lite bg-transparent border-0 border-b-[2px] border-[#B5B5B5] appearance-none dark:text-white dark:border-[#333333] dark:focus:border-[#FF6464] focus:outline-none focus:ring-0 focus:border-[#CA56F2] peer"
             placeholder=" "
             id="message"
             required
@@ -108,12 +125,12 @@ const CommonContact = () => {
         <div className="transition-all duration-300  ease-in-out inline-block hover:bg-gradient-to-r from-[#FA5252] to-[#DD2476] rounded-lg  mt-3">
           <input
             type="submit"
-            className=" transition ease-in duration-200 font-semibold cursor-pointer border-color-910   hover:border-transparent px-6  py-2 rounded-lg border-[2px]  hover:text-white   dark:text-white "
-            value="Submit"
+            className=" transition ease-in duration-200 font-semibold cursor-pointer border-color-910   hover:border-transparent px-6  py-2 rounded-lg border-[2px]  hover:text-white   dark:text-white   disabled:cursor-not-allowed disabled:opacity-60"
+            value={isSubmitting ? "Sending..." : "Submit"}
+            disabled={isSubmitting}
+            aria-busy={isSubmitting}
           />
         </div>
-
-        {/* ToastContainer use here */}
       </form>
     </div>
   );
