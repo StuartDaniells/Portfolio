@@ -51,8 +51,8 @@ export const body: CaseStudyBlock[] = [
     JOB["Scheduled Python jobs<br/>Windows Task Scheduler"]
     BACKUP[("Nightly backup outputs<br/>Recovery copies")]
     APPS["Internal applications<br/>Lab · QMS · fabrication · HR"]
-    PRIMARY["AP-Server-1<br/>Shared application hosting"]
-    SECONDARY["AP-Server-2<br/>Backup/failover hosting"]
+    PRIMARY["Server-1<br/>Shared application hosting"]
+    SECONDARY["Server-2<br/>Backup/failover hosting"]
 
     LAB --> ETL --> LOCAL
     ETL -.->|"Export and migration as required"| ATLAS
@@ -66,7 +66,7 @@ export const body: CaseStudyBlock[] = [
       "Scripts load standardized data into a central local MongoDB and export/migrate to MongoDB Atlas as required.",
       "Scheduled Python jobs (Windows Task Scheduler) write nightly backup outputs.",
       "Internal applications read from both MongoDB Atlas and the central local MongoDB.",
-      "AP-Server-1 hosts shared applications, with AP-Server-2 in a documented standby/failover arrangement.",
+      "Server-1 hosts shared applications, with Server-2 in a documented standby/failover arrangement.",
       "The diagram does not prove continuous replication, point-in-time recovery, or tested failover.",
     ],
   },
@@ -87,7 +87,7 @@ export const body: CaseStudyBlock[] = [
     kind: "paragraph",
     segments: [
       t(
-        "I worked on centralizing and standardizing experimental datasets, wrote Python scripts to export, validate or migrate existing information and integrate consuming applications with MongoDB and MongoDB Atlas, and configured scheduled backup routines. The local environment used scheduled Python jobs during off-hours (described in assessments as around 10 p.m.), while cloud environments also used configured automation. I separately contributed to the shared AP-Server-1 / AP-Server-2 hosting and recovery design."
+        "I worked on centralizing and standardizing experimental datasets, wrote Python scripts to export, validate or migrate existing information and integrate consuming applications with MongoDB and MongoDB Atlas, and configured scheduled backup routines. The local environment used scheduled Python jobs during off-hours (described in assessments as around 10 p.m.), while cloud environments also used configured automation. I separately contributed to the shared Server-1 / Server-2 hosting and recovery design."
       ),
     ],
   },

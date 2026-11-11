@@ -38,7 +38,7 @@ export const internalSections: InternalSectionGroup[] = [
             t(", "),
             b("database restore procedure"),
             t(", and "),
-            b("AP-Server failover"),
+            b("Server failover"),
             t(
               " as different systems. DBLogsSync-like log synchronization is "
             ),
@@ -54,12 +54,12 @@ export const internalSections: InternalSectionGroup[] = [
           ],
           [
             t(
-              "Confirm AP-Server-1/2 OS, deployment details, PM2 role, restart/recovery design and whether failover was truly automatic or manual. Do not claim instantaneous failover or 'no downtime'."
+              "Confirm Server-1/2 OS, deployment details, PM2 role, restart/recovery design and whether failover was truly automatic or manual. Do not claim instantaneous failover or 'no downtime'."
             ),
           ],
           [
             t(
-              "2023 review pp. 2–3: nightly 10 p.m. backup, avoided loss of research data, team server ownership. 2024 review pp. 3–4: centralized database/backups, AP-Server-1 & -2 and described failover."
+              "2023 review pp. 2–3: nightly 10 p.m. backup, avoided loss of research data, team server ownership. 2024 review pp. 3–4: centralized database/backups, Server-1 & Server-2 and described failover."
             ),
           ],
           [
